@@ -1,8 +1,8 @@
-def call(String project, String ImageTag, String hubUser){
+def call(String project, String ImageTag, String gitUser){
     
     sh """
-     podman image build -t ${hubUser}/${project} . 
-     podman image tag ${hubUser}/${project} ${hubUser}/${project}:${ImageTag}
-     podman image tag ${hubUser}/${project} ${hubUser}/${project}:latest
+     podman login --tls-verify=false  -u ${gitUser} -p redhat11 registry.demo.com
+     podman build -t registry.demo.com/${gitUser}/${project}:${ImageTag} .
+     podman push --tls-verify=false registry.demo.com/${gitUser}/${project}:${ImageTag}
     """
 }
