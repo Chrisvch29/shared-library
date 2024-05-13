@@ -1,4 +1,4 @@
-def call(String project, String imageTag, String gitUser){
+def call(String gitUser, String project, String imageTag){
     
     sh """
      podman push --tls-verify=false registry.demo.com/${gitUser}/${project}:${imageTag}
